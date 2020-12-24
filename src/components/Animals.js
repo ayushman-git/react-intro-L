@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import useDropdown from "../hooks/useDropdown";
 import pet, { ANIMALS } from "@frontendmasters/pet";
 import Result from "./Result";
+import ThemeContext from "./ThemeContext";
 
 const Animal = () => {
   const [location, setLocation] = useState("Seattle, WA");
@@ -9,6 +10,7 @@ const Animal = () => {
   const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS);
   const [breed, BreedDropdown, setBreed] = useDropdown("Breed", "", breeds);
   const [pets, setPets] = useState([]);
+  const [theme] = useContext(ThemeContext);
 
   async function requestPet() {
     const { animals } = await pet.animals({
@@ -50,7 +52,7 @@ const Animal = () => {
         </div>
         <AnimalDropdown /> <br />
         <BreedDropdown />
-        <button>Submit</button>
+        <button style={{ backgroundColor: theme }}>Submit</button>
       </form>
       <Result pets={pets} />
     </div>
