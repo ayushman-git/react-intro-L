@@ -1,0 +1,8 @@
+.petWrapper {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.petWrapper > * {
+  margin: 1em;
+}

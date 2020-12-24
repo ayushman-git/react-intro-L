@@ -1,14 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Router, Link } from "@reach/router";
 import Child from "./components/Child";
 import Animals from "./components/Animals";
+import Details from "./components/Details";
 
 const App = () => {
   return (
     <div>
-      <h1>Hello</h1>
+      <Link to="/">
+        <h1>Home</h1>
+      </Link>
       <Child name="Ayushman" age="22" />
-      <Animals />
+      <Router>
+        <Animals path="/" />
+        <Details path="/details/:id" />
+      </Router>
     </div>
   );
 };
