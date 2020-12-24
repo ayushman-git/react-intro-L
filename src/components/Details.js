@@ -1,6 +1,8 @@
 import React from "react";
 import ThemeContext from "./ThemeContext";
 import pet from "@frontendmasters/pet";
+import Modal from "../portal/Modal";
+import { navigate } from "@reach/router";
 
 //Can't use hooks with classes
 class Details extends React.Component {
@@ -9,6 +11,7 @@ class Details extends React.Component {
 
     this.state = {
       loading: true,
+      showModal: false
     };
   }
 
@@ -26,6 +29,8 @@ class Details extends React.Component {
       });
     });
   }
+  toggleModal = () => this.setState({ showModal: !this.state.showModal });
+  adopt = () => navigate(this.state.url);
   render() {
     if (this.state.loading) {
       return <h1>Fetching Data</h1>;
@@ -50,6 +55,15 @@ class Details extends React.Component {
             )}
           </ThemeContext.Consumer>
           <p>{description}</p>
+          {showModal ? (
+            <Modal>
+              <h1>Would you like to adopt {name}?</h1>
+              <div className="buttons">
+                <button onClick={this.adopt}>Yes</button>
+                <button onClick={this.toggleModal}>No, I am a monster</button>
+              </div>
+            </Modal>
+          ) : null}
         </div>
       </div>
     );
